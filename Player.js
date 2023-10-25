@@ -8,7 +8,7 @@ class Player {
   static betRequest(gameState, bet) {
     var game = new GameState(gameState);
     if(game.bettingRound() === "pre flop") {
-      bet(game.me().score() * game.bigBlind());
+      bet(Math.max(0, game.me().score() * game.bigBlind()));
     } else {
       bet(game.toCall());
     }
