@@ -2,12 +2,16 @@ const GameState = require('./src/GameState');
 
 class Player {
   static get VERSION() {
-    return '0.1';
+    return 'Get playing';
   }
 
   static betRequest(gameState, bet) {
     var game = new GameState(gameState);
-    bet(0);
+    if(game.bettingRound() === "pre flop") {
+      bet(game.me().score() * game.bigBlind());
+    } else {
+      bet(game.toCall());
+    }
   }
 
   static showdown(gameState) {
